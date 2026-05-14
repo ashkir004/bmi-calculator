@@ -1,0 +1,113 @@
+*, *::before, *::after {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+:root {
+    --white: #ffffff;
+    --black: #000000;
+    --grey-500: #5E6E85;
+    --grey-300: #ACC1DE;
+    --blue-100: #E1E7FE;
+    --blue-300: #B3D2F1;
+    --blue-500: #345FF6;
+    --blue-900: #253347;
+    --gradient: linear-gradient(90deg, #D6FCFE 0%, #D6E6FE 100%);
+
+
+    --space-0: 0;
+    --space-25: calc(4 / 16 * 1rem);
+    --space-50: calc(6 / 16 * 1rem);
+    --space-100: calc(8 / 16 * 1rem);
+    --space-150: calc(12 / 16 * 1rem);
+    --space-200: calc(16 / 16 * 1rem);
+    --space-250: calc(20 / 16 * 1rem);
+    --space-300: calc(24 / 16 * 1rem);
+    --space-400: calc(32 / 16 * 1rem);
+    --space-500: calc(40 / 16 * 1rem);
+    --space-600: calc(48 / 16 * 1rem);
+    --space-650: calc(50 / 16 * 1rem);
+    --space-700: calc(56 / 16 * 1rem);
+    --space-800: calc(64 / 16 * 1rem);
+    --space-900: calc(72 / 16 * 1rem);
+    --space-1000: calc(80 / 16 * 1rem);
+    --space-1100: calc(88 / 16 * 1rem);
+    --space-1200: calc(96 / 16 * 1rem);
+    --space-1300: calc(104 / 16 * 1rem);
+    --space-1400: calc(112 / 16 * 1rem);
+    --space-1500: calc(120 / 16 * 1rem);
+    --space-1600: calc(128 / 16 * 1rem);
+    --space-1700: calc(136 / 16 * 1rem);
+    --space-1800: calc(144 / 16 * 1rem);
+
+    --font: 'Inter', sans-serif;
+
+    --font-xxl: calc(64 / 16 * 1rem);
+    --font-xl: calc(48 / 16 * 1rem);
+    --font-lg: calc(32 / 16 * 1rem);
+    --font-md: calc(24 / 16 * 1rem);
+    --font-sm: calc(20 / 16 * 1rem);
+    --font-xs: calc(16 / 16 * 1rem);
+    --font-xxs: calc(14 / 16 * 1rem);
+
+    --line-height-xl: 1.5;
+    --line-height-lg: 1.2;
+    --line-height-md: 1.1;
+    --line-height-sm: 1;
+
+    --letter-spacing-sm: -5%;
+
+    --w-bold: 700;
+    --w-semibold: 600;
+    --w-regular: 400;
+}
+
+@font-face {
+    font-family: 'Inter';
+    src: url("./lib/assets/fonts/Inter-VariableFont_YOPQ,wght.ttf") format('truetype');
+    font-weight: 100 900;
+    font-style: normal;
+    font-display: swap;
+}
+
+
+body {
+    font-family: 'Inter', sans-serif;
+    /* background: var(--gradient); */
+}
+
+/* *:focus-visible {
+    outline: 2px solid var(--blue-300);
+    outline-offset: .5px;
+}    */
+
+.show-sm {
+    display: block;
+}
+
+.hide-sm {
+    display: none;
+}
+
+
+@media (min-width: 48rem) {
+    .show-md {
+        display: block;
+    }
+
+    .hide-md {
+        display: none;
+    }
+}
+
+
+@media (min-width: 64rem) {
+    .show-lg {
+        display: block;
+    }
+
+    .hide-lg {
+        display: none;
+    }
+}
