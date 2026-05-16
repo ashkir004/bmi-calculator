@@ -65,7 +65,7 @@
 
 @font-face {
     font-family: 'Inter';
-    src: url("./lib/assets/fonts/Inter-VariableFont_YOPQ,wght.ttf") format('truetype');
+    src: url("./lib/assets/fonts/Inter-VariableFont_slnt\,wght.ttf") format('truetype');
     font-weight: 100 900;
     font-style: normal;
     font-display: swap;
@@ -81,6 +81,27 @@ body {
     outline: 2px solid var(--blue-300);
     outline-offset: .5px;
 }    */
+
+
+
+/* Hide spin buttons in Chrome, Safari, and Edge */
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Hide spin buttons in Firefox */
+input[type=number] {
+  appearance: textfield;
+  -moz-appearance: textfield;
+}
+
+
+.hide {
+    display: none;
+}
+
 
 .show-sm {
     display: block;
