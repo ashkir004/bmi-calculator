@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { calculateBMI, validateBMIInput } from "$lib/bmiCalculation";
+    import { calculateBMI, validateBMIInput, getBMIResult } from "$lib/bmiCalculation";
     import type { $ZodFlattenedError } from "zod/v4/core";
     import type { BMIFormData } from "$lib/bmiValidation";
 
@@ -7,10 +7,13 @@
 
     let height = $state<number>(0);         // cm or ft
     let weight = $state<number>(0);     // kg or st
+    let feet = $derived(height);
+    let stone = $derived(weight);
     let heightInches = $state<number>(0);
     let weightLbs = $state<number>(0);
     let bmi = $state<number | undefined>(undefined);
     let validationResults = $state<{ success: boolean; errors?: $ZodFlattenedError<BMIFormData> } | undefined>(undefined);
+    let bmiResult = $derived(getBMIResult(bmi, unitCategory, height, feet, heightInches));
 
     $effect(() => {
 
@@ -43,8 +46,8 @@
             unit: unitCategory,
             heightCm: height,
             weightKg: weight,
-            feet: height,
-            stone: weight,
+            feet: feet,
+            stone: stone,
             inches: heightInches,
             pounds: weightLbs
         };
@@ -110,16 +113,18 @@
         {/if}
     </div>
     <div class="bmi-results">
-        {#if bmi === undefined}
+        {#if bmi === undefined || validationResults?.success === false }
             <div class="bmi-welcome">
                 <h2 >Welcome!</h2>
                 <p>Enter your height and weight and you'll see your BMI result here</p>
             </div>
         {:else}
             <p class="bmi-label">Your BMI is... <span class="bmi-value">{bmi?.toFixed(1)}</span></p>
-            <p class="bmi-description">Your BMI suggests you're a healthy weight. Your ideal weight is between <b>63.3kgs - 85.2kgs</b>.</p>
-        {/if}
-    </div>
+            <p class="bmi-description">Your BMI suggests you're a {bmiResult?.category}. Your ideal weight is between 
+                <b>{bmiResult?.weightRange}</b></p>
+
+            {/if}
+        </div>
 </form>
 {/key}
 
