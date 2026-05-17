@@ -7,6 +7,7 @@
 :root {
     --white: #ffffff;
     --black: #000000;
+    --red: #FF0000;
     --grey-500: #5E6E85;
     --grey-300: #ACC1DE;
     --blue-100: #E1E7FE;
@@ -50,6 +51,7 @@
     --font-sm: calc(20 / 16 * 1rem);
     --font-xs: calc(16 / 16 * 1rem);
     --font-xxs: calc(14 / 16 * 1rem);
+    --font-xxsm: calc(12 / 16 * 1rem);
 
     --line-height-xl: 1.5;
     --line-height-lg: 1.2;

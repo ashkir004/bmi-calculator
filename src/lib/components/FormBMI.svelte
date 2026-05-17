@@ -1,6 +1,6 @@
 <script lang="ts">
     import { calculateBMI, validateBMIInput } from "$lib/bmiCalculation";
-    import type { $ZodFlattenedError, $ZodSchema } from "zod/v4/core";
+    import type { $ZodFlattenedError } from "zod/v4/core";
     import type { BMIFormData } from "$lib/bmiValidation";
 
     let unitCategory = $state<'metric' | 'imperial'>('metric');
@@ -10,7 +10,7 @@
     let heightInches = $state<number>(0);
     let weightLbs = $state<number>(0);
     let bmi = $state<number | undefined>(undefined);
-    let validationErrors = $state<$ZodFlattenedError<BMIFormData> | undefined>(undefined);
+    let validationResults = $state<{ success: boolean; errors?: $ZodFlattenedError<BMIFormData> } | undefined>(undefined);
 
     $effect(() => {
 
@@ -20,10 +20,12 @@
             height = 0;
             weight = 0;
             bmi = undefined;
+            validationResults = undefined;
         } else {
             height = 0;
             weight = 0;
             bmi = undefined;
+            validationResults = undefined;
         }
     });
     
@@ -53,9 +55,10 @@
 
         if (validationResult.success) {
             bmi = calculateBMI(inputData);
+            validationResults = { success: true };
         } else {
             bmi = undefined;
-            validationErrors = validationResult.errors;
+            validationResults = { success: false, errors: validationResult.errors };
         }
     }
 
@@ -78,10 +81,17 @@
                 <span class="unit-label-imperial">in</span>
             {/if}
         </div>
+        {#if unitCategory === 'metric'}
+            <p class="error">{validationResults?.errors && 'heightCm' in validationResults.errors.fieldErrors ? validationResults.errors.fieldErrors?.heightCm?.[0] : ''}</p>
+        {:else}
+            <div class="error-messages">
+                <p class="error">{validationResults?.errors && 'feet' in validationResults.errors.fieldErrors ? validationResults.errors.fieldErrors?.feet?.[0] : ''}</p>
+                <p class="error">{validationResults?.errors && 'inches' in validationResults.errors.fieldErrors ? validationResults.errors.fieldErrors?.inches?.[0] : ''}</p>
+            </div>
+        {/if}
     </div>
     <div class="form-group">
         <label for="weight">Weight</label>
-
         <div class="inputs-wrapper">
             <input class="input-metric" type="number" id="weight" name="weight" bind:value={weight} required onfocus={handleFocus} />
             <span class="unit-label-metric">{unitCategory === 'metric' ? 'kg' : 'st'}</span>
@@ -90,7 +100,14 @@
                 <span class="unit-label-imperial">lbs</span>
             {/if}
         </div>
-
+        {#if unitCategory === 'metric'}
+            <p class="error">{validationResults?.errors && 'weightKg' in validationResults.errors.fieldErrors ? validationResults.errors.fieldErrors.weightKg?.[0] : ''}</p>
+        {:else}
+        <div class="error-messages">
+            <p class="error">{validationResults?.errors && 'stone' in validationResults.errors.fieldErrors ? validationResults.errors.fieldErrors.stone?.[0] : ''}</p>
+            <p class="error">{validationResults?.errors && 'pounds' in validationResults.errors.fieldErrors ? validationResults.errors.fieldErrors.pounds?.[0] : ''}</p>
+        </div>
+        {/if}
     </div>
     <div class="bmi-results">
         {#if bmi === undefined}
@@ -240,6 +257,19 @@
         font-size: var(--font-xxs);
         font-weight: var(--w-regular);
         line-height: var(--line-height-xl);
+    }
+
+    .error-messages {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        gap: var(--space-25);
+    }
+
+    .error {
+        font-size: var(--font-xxsm);
+        font-weight: var(--w-regular);
+        color: var(--red);
     }
 
 
