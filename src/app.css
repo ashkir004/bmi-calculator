@@ -14,7 +14,7 @@
     --blue-300: #B3D2F1;
     --blue-500: #345FF6;
     --blue-900: #253347;
-    --gradient: linear-gradient(90deg, #D6FCFE 0%, #D6E6FE 100%);
+    --gradient: linear-gradient(90deg, var(--white) 0%, var(--blue-100) 100%);
 
 
     --space-0: 0;

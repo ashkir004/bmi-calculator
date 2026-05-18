@@ -14,3 +14,19 @@
 
     <Limitations />
 </main>
+
+<style>
+    main {
+        display: flex;
+        flex-direction: column;
+        gap: var(--space-700);
+        margin: var(--space-300) auto var(--space-600);
+    }
+
+    @media (min-width: 80rem) {
+        main {
+            gap: var(--space-1000);
+            margin-bottom: var(--space-1300);
+        }
+    }
+</style>

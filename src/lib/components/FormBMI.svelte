@@ -135,8 +135,10 @@
         gap: var(--space-300);
         text-align: start;
         background-color: var(--white);
-        border: 1px solid var(--grey-500);
         padding: var(--space-300);
+        border-radius: var(--space-200);
+        box-shadow: 0 var(--space-200) var(--space-400) rgba(0, 0, 0, 0.1);
+        width: 100%;
     }
 
     .form-header {
@@ -275,6 +277,31 @@
         font-size: var(--font-xxsm);
         font-weight: var(--w-regular);
         color: var(--red);
+    }
+
+    @media (min-width: 48rem) {
+
+        form {
+            padding: var(--space-400);
+        }
+
+
+        .bmi-results {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+            gap: var(--space-300);
+            border-radius: var(--space-200) var(--space-1800) var(--space-1800) var(--space-200);
+        }
+
+        .bmi-label {
+            flex-basis: 50%;
+        }
+
+        .bmi-description {
+            flex-basis: 50%;
+        }
     }
 
 
